@@ -6,25 +6,39 @@ import LeftBar from './components/leftBar/LeftBar'
 import RightBar from './components/rightBar/RightBar'
 import Home from './pages/home/Home'
 import Profile from './pages/profile/Profile'
+import { DarkModeContext } from './context/theme-context'
+import { useState } from 'react'
 
 import './App.scss'
 
 function App() {
 
-  const currentUser = true
+  const currentUser: boolean = true
 
-  const Layout = () => {
+  const isBrowserDefaulDark = () => window.matchMedia('(prefers-color-scheme: dark)').matches
+
+  const getDefaultTheme = (): string => {
+    const localStorageTheme = localStorage.getItem("darkMode")
+    const browserDefault = isBrowserDefaulDark() ? 'dark' : 'light'
+    return localStorageTheme || browserDefault
+  }
+
+  const [darkMode, setDarkMode] = useState(getDefaultTheme());
+
+  const Layout: React.FC = () => {
     return (
-      <div className='theme-dark'>
-        <Navbar/>
-        <div style={{ display: "flex" }}>
-          <LeftBar/>
-          <div style={{ flex: 6 }}>
-            <Outlet/>  
+      <DarkModeContext.Provider value={{ darkMode, setDarkMode }}>
+        <div className={`theme-${darkMode ? "dark" : "light"}`}>
+          <Navbar/>
+          <div style={{ display: "flex" }}>
+            <LeftBar/>
+            <div style={{ flex: 6 }}>
+              <Outlet/>  
+            </div>
+            <RightBar/>
           </div>
-          <RightBar/>
         </div>
-      </div>
+      </DarkModeContext.Provider>
     )
   }
 
@@ -74,3 +88,5 @@ function App() {
 }
 
 export default App
+
+

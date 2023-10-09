@@ -1,14 +1,14 @@
 @import "../../App.scss";
 
 .rightBar{
-    // @include themify($themes){
+    @include themify($themes){
         flex: 3;
         position: sticky;
         top: 70px;
         height: calc(100vh - 70px);
         overflow: scroll;
-        background-color: #f6f3f3;
-        // background-color: themed("bgSoft");
+        // background-color: #f6f3f3;
+        background-color: themed("bgSoft");
 
         &::-webkit-scrollbar {
             display: none;
@@ -23,8 +23,8 @@
                 box-shadow: 0px 0px 15px 1px rgba(0, 0, 0, 0.09);
                 padding: 20px;
                 margin-bottom: 20px;
-                background-color: #f6f3f3;
-                // background-color: themed("bg");
+                // background-color: #f6f3f3;
+                background-color: themed("bg");
 
                 &__title{
                     color: gray;
@@ -61,21 +61,22 @@
 
 
                         &__p{
-                            color:  #555;
-                            // color: themed("textColorSoft");
+                            // color:  #555;
+                            color: themed("textColorSoft");
                         }
 
                         
                         &__username{
                             font-weight: 500;
-                            color: #000;
-                            // color: themed("textColor");
+                            // color: #000;
+                            color: themed("textColor");
                         }
 
                     }
 
                     &__timeActivity{
-                        color:  #555;
+                        // color:  #555;
+                        color: themed("textColor");
                     }
 
                     &__buttons{
@@ -103,5 +104,5 @@
             }
         }
 
-    // }
+    }
 }

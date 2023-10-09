@@ -36,9 +36,9 @@ $themes: (
   }
 }
 
-// @function themed($key) {
-//   @return map-get($theme-map, $key);
-// }
+@function themed($key) {
+  @return map-get($theme-map, $key);
+}
 
 // @mixin mobile {
 //   @media (max-width: 480px) {

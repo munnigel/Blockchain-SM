@@ -7,8 +7,10 @@
         top: 70px;
         height: calc(100vh - 70px);
         overflow: scroll;
-        background-color: themed("bg");
-        color: themed("textColor");
+        background-color: white;
+        color: #000;
+        // background-color: themed("bg");
+        // color: themed("textColor");
 
         &__container{
             padding: 20px;
@@ -17,7 +19,8 @@
                 margin: 20px 0px;
                 border: none;
                 height: 0.5px;
-                background-color: themed("border");
+                background-color: lightgray;
+                // background-color: themed("border");
             }
 
             &__menu{

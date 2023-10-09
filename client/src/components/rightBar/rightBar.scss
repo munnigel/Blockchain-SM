@@ -49,11 +49,33 @@
                             object-fit: cover;
                         }
 
+                        &__online{
+                            width: 12px;
+                            height: 12px;
+                            border-radius: 50%;
+                            background-color: limegreen;
+                            position: absolute;
+                            top: 0;
+                            left: 30px;
+                        }
+
+
+                        &__p{
+                            color:  #555;
+                            // color: themed("textColorSoft");
+                        }
+
+                        
                         &__username{
                             font-weight: 500;
                             color: #000;
                             // color: themed("textColor");
                         }
+
+                    }
+
+                    &__timeActivity{
+                        color:  #555;
                     }
 
                     &__buttons{

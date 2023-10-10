@@ -27,7 +27,7 @@ const Stories = () => {
     <div className="stories">
       {
         stories.map(story => (
-          <div className="stories__story">
+          <div className="stories__story" key={story.id}>
             <img
               className="stories__story__image"
               src={story.image} 

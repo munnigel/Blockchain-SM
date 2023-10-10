@@ -3,6 +3,5 @@ import { createContext } from "react"
 
 export const DarkModeContext = createContext({
     darkMode: 'light',
-    setDarkMode: () => {}
+    setDarkMode: (darkMode: string) => {}
 })
-

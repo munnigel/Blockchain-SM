@@ -9,11 +9,12 @@ import Profile from './pages/profile/Profile'
 import { DarkModeContext } from './context/theme-context'
 import { useState } from 'react'
 
+
 import './App.scss'
 
 function App() {
 
-  const currentUser: boolean = true
+  const currentUser = true
 
   const isBrowserDefaulDark = () => window.matchMedia('(prefers-color-scheme: dark)').matches
 

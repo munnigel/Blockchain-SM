@@ -3,9 +3,11 @@ import ThumbUpAltOutlinedIcon from '@mui/icons-material/ThumbUpAltOutlined';
 import TextsmsOutlinedIcon from "@mui/icons-material/TextsmsOutlined";
 import ShareOutlinedIcon from "@mui/icons-material/ShareOutlined";
 import MoreHorizIcon from "@mui/icons-material/MoreHoriz";
+import { Link } from "react-router-dom";
+import { useState } from 'react';
 
 import "./post.scss"
-import { Link } from "react-router-dom";
+import Comments from '../comments/Comments';
 
 interface Props{
     post: any
@@ -13,7 +15,10 @@ interface Props{
 
 const Post: React.FC<Props> = ({post}) => {
 
-    const liked = true
+    const [commentOpen, setCommentOpen] = useState(false)
+
+    //TEMPORARY
+    const liked = false
 
   return (
     <div className="post">
@@ -52,15 +57,18 @@ const Post: React.FC<Props> = ({post}) => {
                     }
                     50 Likes
                 </div>
-                <div className="post__container__info__item">
+                <div className="post__container__info__item" onClick={() => setCommentOpen(!commentOpen)}>
                     <TextsmsOutlinedIcon/>
-                    See Comments
+                    12 Comments
                 </div>
                 <div className="post__container__info__item">
                     <ShareOutlinedIcon/>
                     Share
                 </div>
             </div>
+            {
+                commentOpen && <Comments/>
+            }
         </div>
     </div>
   )

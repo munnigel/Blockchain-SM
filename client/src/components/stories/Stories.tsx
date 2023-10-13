@@ -1,6 +1,8 @@
 import "./stories.scss"
 
 const Stories = () => {
+
+  //TEMPORARY
   const stories = [
     {
       id: 1,

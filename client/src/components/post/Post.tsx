@@ -13,6 +13,8 @@ interface Props{
 
 const Post: React.FC<Props> = ({post}) => {
 
+    const liked = true
+
   return (
     <div className="post">
         <div className="post__container">
@@ -45,13 +47,18 @@ const Post: React.FC<Props> = ({post}) => {
             </div>
             <div className="post__container__info">
                 <div className="post__container__info__item">
-                    <ThumbUpAltOutlinedIcon/>
+                    {
+                        liked ? <ThumbDownOutlinedIcon/> : <ThumbUpAltOutlinedIcon/>
+                    }
+                    50 Likes
                 </div>
                 <div className="post__container__info__item">
                     <TextsmsOutlinedIcon/>
+                    See Comments
                 </div>
                 <div className="post__container__info__item">
                     <ShareOutlinedIcon/>
+                    Share
                 </div>
             </div>
         </div>

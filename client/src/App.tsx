@@ -8,9 +8,13 @@ import Home from './pages/home/Home'
 import Profile from './pages/profile/Profile'
 import { DarkModeContext } from './context/theme-context'
 import { useState } from 'react'
+import { Provider } from 'react-redux'
+import store from './store/store'
+
 
 
 import './App.scss'
+
 
 function App() {
 
@@ -82,9 +86,11 @@ function App() {
 
 
   return (
-    <div>
-      <RouterProvider router={router} />
-    </div>
+    <Provider store={store}>
+      <div>
+        <RouterProvider router={router} />
+      </div>
+    </Provider>
   )
 }
 

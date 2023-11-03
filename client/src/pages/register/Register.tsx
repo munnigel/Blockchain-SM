@@ -1,7 +1,37 @@
-import { Link } from "react-router-dom"
-import "./register.scss"
+import React, { useState } from 'react';
+import { useDispatch } from 'react-redux';
+import { registerUser } from '../../store/accountSlice'; 
+import { Link } from 'react-router-dom';
+import './register.scss';
+import { useNavigate } from 'react-router-dom';
 
 const Register = () => {
+
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
+  
+  const [formData, setFormData] = useState({
+    username: '',
+    email: '',
+    password: '',
+    name: '',
+  });
+
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setFormData({
+      ...formData,
+      [e.target.name]: e.target.value,
+    });
+  };
+
+  const handleSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    dispatch(registerUser(formData));
+    // redirect to home page
+    navigate('/');
+
+  };
+  
   return (
     <div className="register">
       <div className="register__card">
@@ -25,30 +55,30 @@ const Register = () => {
               type="text"
               placeholder="Username"
               name="username"
-              // onChange={handleChange}
+              onChange={handleChange}
             />
             <input
               className="register__card__right__form__input"
               type="email"
               placeholder="Email"
               name="email"
-              // onChange={handleChange}
+              onChange={handleChange}
             />
             <input
               className="register__card__right__form__input"
               type="password"
               placeholder="Password"
               name="password"
-              // onChange={handleChange}
+              onChange={handleChange}
             />
             <input
               className="register__card__right__form__input"
               type="text"
               placeholder="Name"
               name="name"
-              // onChange={handleChange}
+              onChange={handleChange}
             />
-            <button className="register__card__right__form__registerBtn">Register</button>
+            <button className="register__card__right__form__registerBtn" onClick={handleSubmit}>Register</button>
           </form>
         </div>
       </div>

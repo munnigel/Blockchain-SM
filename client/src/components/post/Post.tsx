@@ -5,6 +5,7 @@ import ShareOutlinedIcon from "@mui/icons-material/ShareOutlined";
 import MoreHorizIcon from "@mui/icons-material/MoreHoriz";
 import { Link } from "react-router-dom";
 import { useState } from 'react';
+import { formatTimestamp } from '../../utils/dateUtils';
 
 import "./post.scss"
 import Comments from '../comments/Comments';
@@ -37,7 +38,7 @@ const Post: React.FC<Props> = ({post}) => {
                         >
                             <span className="post__container__user__userInfo__details__name">{post.name}</span>
                         </Link>
-                        <span className="post__container__user__userInfo__details__date">1 min ago</span>
+                        <span className="post__container__user__userInfo__details__date">{formatTimestamp(post.timestamp)}</span>
                     </div>
                 </div>
                 <MoreHorizIcon/>

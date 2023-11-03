@@ -9,10 +9,12 @@ import SearchOutlinedIcon from "@mui/icons-material/SearchOutlined"
 import { DarkModeContext } from '../../context/theme-context'
 import { Link } from 'react-router-dom'
 import { useContext, useEffect } from 'react'
+import { useSelector } from 'react-redux'
 
 import "./navbar.scss"
 
 const Navbar = () => {
+  const name = useSelector((state: any) => state.account.name)
   const { darkMode, setDarkMode } = useContext(DarkModeContext)
 
   const toggle = () => {
@@ -58,7 +60,7 @@ const Navbar = () => {
             src="https://images.pexels.com/photos/4974360/pexels-photo-4974360.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" 
             alt="" 
           />
-          <span className='navbar__right__user__username'>Dayan Nahshon</span>
+          <span className='navbar__right__user__username'>{name}</span>
         </div>
       </div>
     </div>

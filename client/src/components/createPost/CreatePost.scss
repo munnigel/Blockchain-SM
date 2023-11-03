@@ -1,0 +1,54 @@
+@import "../../App.scss";
+
+
+
+.create-post-container {
+    @include themify($themes) {
+        display: flex;
+        flex-direction: column;
+        padding: 20px;
+        border: 1px solid #e1e1e1;
+        border-radius: 8px;
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+        margin: 20px 0;
+        background-color: themed('bg');
+        border: themed('border');
+
+        textarea {
+            resize: none;
+            padding: 10px;
+            border-radius: 8px;
+            border: 1px themed('border');
+            font-size: 1rem;
+            margin-bottom: 10px;
+            height: 100px;
+
+            background-color: themed('bgSoft');
+            color: themed('textColor');
+            border: 1px solid themed('border');
+
+            &:focus {
+                outline: none;
+                border-color: themed('textColorSoft');
+            }
+        }
+
+        button {
+            align-self: flex-end;
+            padding: 10px 15px;
+            // background-color: #ff4081; // You can choose your color
+            // color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+            background-color: themed('logo');
+            color: themed('bg');
+
+            &:hover {
+                background-color: #e53770; // Darker shade for hover effect
+            }
+        }
+    }
+
+}

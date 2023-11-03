@@ -1,12 +1,12 @@
 import Posts from "../../components/posts/Posts"
-import Stories from "../../components/stories/Stories"
+import CreatePost from "../../components/createPost/CreatePost"
+
 import "./home.scss"
 
 const Home = () => {
   return (
     <div className="home">
-      <Stories/>
-      {/* <Share/> */}
+      <CreatePost/>
       <Posts/>
     </div>
   )

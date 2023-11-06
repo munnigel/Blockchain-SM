@@ -1,6 +1,6 @@
 import React from 'react';
 import { useSelector } from 'react-redux';
-import { RootState } from './store'; // Assuming your store is in the same directory
+import { RootState } from '../../store'; // Assuming your store is in the same directory
 import Post from '../post/Post';
 import './posts.scss';
 

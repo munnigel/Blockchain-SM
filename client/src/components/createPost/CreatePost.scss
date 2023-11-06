@@ -51,4 +51,31 @@
         }
     }
 
+    .upload-image-button {
+        display: inline-block;
+        width: 40px; // You can adjust the size as needed
+        height: 40px;
+        background-color: #f0f0f0; // Any color you prefer
+        border-radius: 50%; // This makes it circular
+        text-align: center;
+        line-height: 40px; // Center the icon vertically
+        cursor: pointer;
+        
+        // Icon specific styling
+        svg {
+          width: 20px; // Adjust icon size
+          height: 20px; // Adjust icon size
+          color: #333; // Icon color
+        }
+      }
+      
+      // Additional styles for the image preview if needed
+      .image-preview img {
+        max-width: 50%;
+        height: auto;
+        border-radius: 8px;
+        margin-top: 10px; // Spacing between image preview and upload button
+      }
+      
+
 }

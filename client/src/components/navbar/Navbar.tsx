@@ -55,12 +55,14 @@ const Navbar = () => {
         <EmailOutlinedIcon />
         <NotificationsOutlinedIcon />
         <div className='navbar__right__user'>
-          <img 
-            className='navbar__right__user__userimage' 
-            src="https://images.pexels.com/photos/4974360/pexels-photo-4974360.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" 
-            alt="" 
-          />
-          <span className='navbar__right__user__username'>{name}</span>
+          <Link to={`/profile/${name}`} className='navbar__right__user__link'>
+            <img 
+              className='navbar__right__user__userimage' 
+              src="https://images.pexels.com/photos/4974360/pexels-photo-4974360.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" 
+              alt="" 
+            />
+            <span className='navbar__right__user__username'>{name}</span>
+          </Link>
         </div>
       </div>
     </div>

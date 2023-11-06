@@ -16,19 +16,11 @@ import { useSelector } from "react-redux";
 import "./leftBar.scss"
 
 const LeftBar = () => {
-  const name = useSelector((state: any) => state.account.name)
+
   return (
     <div className="leftBar">
       <div className="leftBar__container">
         <div className="leftBar__container__menu">
-          <div className="leftBar__container__menu__user">
-            <img 
-              className="leftBar__container__menu__user__userimage" 
-              src="https://images.pexels.com/photos/4974360/pexels-photo-4974360.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" 
-              alt="" 
-            />
-            <span className="leftBar__container__menu__user__username">{name}</span>
-          </div>
           <div className="leftBar__container__menu__item">
             <img 
               className="leftBar__container__menu__item__imageItem" 

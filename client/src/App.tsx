@@ -7,7 +7,7 @@ import RightBar from './components/rightBar/RightBar'
 import Home from './pages/home/Home'
 import Profile from './pages/profile/Profile'
 import { DarkModeContext } from './context/theme-context'
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { Provider } from 'react-redux'
 import store from './store/store'
 
@@ -18,8 +18,6 @@ import './App.scss'
 
 function App() {
 
-  const currentUser = true
-
   const isBrowserDefaulDark = () => window.matchMedia('(prefers-color-scheme: dark)').matches
 
   const getDefaultTheme = (): string => {
@@ -29,6 +27,19 @@ function App() {
   }
 
   const [darkMode, setDarkMode] = useState(getDefaultTheme());
+
+  const getCurrentUser = () => {
+    const user = localStorage.getItem('currentUser');
+    return user ? user : null;
+  };
+
+
+  const [currentUser, setCurrentUser] = useState(getCurrentUser());
+
+  useEffect(() => {
+    // When App loads, we check if currentUser exists in local storage
+    setCurrentUser(getCurrentUser());
+  }, []);
 
   const Layout: React.FC = () => {
     return (

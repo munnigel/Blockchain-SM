@@ -27,6 +27,9 @@ const Register = () => {
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     dispatch(registerUser(formData));
+
+    // Save the email to localStorage
+    localStorage.setItem('currentUser', formData.email);
     // redirect to home page
     navigate('/');
 

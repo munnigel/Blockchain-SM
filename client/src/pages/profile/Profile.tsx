@@ -38,7 +38,7 @@ const ProfilePage: React.FC = () => {
           <div className="profile-details">
             <h1 className="profile-name">{profile.name}</h1>
             <div className="profile-stats">
-              <span>{profile.followersCount} Followers</span> - <span>{profile.followingCount} Following</span>
+              <span>Followers</span> - <span>Following</span>
             </div>
             {!isCurrentUser && (
               <button className="friend-button">Friend</button>

@@ -2,10 +2,10 @@ import HomeOutlinedIcon from '@mui/icons-material/HomeOutlined'
 import DarkModeOutlinedIcon from '@mui/icons-material/DarkModeOutlined'
 import WbSunnyOutlinedIcon from "@mui/icons-material/WbSunnyOutlined"
 import WidgetsOutlinedIcon from '@mui/icons-material/WidgetsOutlined'
-import NotificationsOutlinedIcon from '@mui/icons-material/NotificationsOutlined'
-import EmailOutlinedIcon from "@mui/icons-material/EmailOutlined"
-import PersonOutlineOutlinedIcon from '@mui/icons-material/PersonOutlineOutlined'
 import SearchOutlinedIcon from "@mui/icons-material/SearchOutlined"
+import { SettingOutlined, DownOutlined } from '@ant-design/icons'
+import type { MenuProps } from 'antd';
+import { Dropdown, Space } from 'antd';
 import { DarkModeContext } from '../../context/theme-context'
 import { Link } from 'react-router-dom'
 import { useContext, useEffect } from 'react'
@@ -25,6 +25,23 @@ const Navbar = () => {
     localStorage.setItem("darkMode", darkMode);
   }, [darkMode]);
   
+  const items: MenuProps['items'] = [
+    {
+      key: '1',
+      label: (
+        <a target="_blank" rel="noopener noreferrer" href="https://www.antgroup.com">
+          Settings
+        </a>
+      ),
+    },
+
+    {
+      key: '1',
+      danger: true,
+      label: 'Logout',
+    },
+  ];
+
   return (
     <div className='navbar'>
       <div className='navbar__left'>
@@ -51,9 +68,6 @@ const Navbar = () => {
         </div>
       </div>
       <div className='navbar__right'>
-        <PersonOutlineOutlinedIcon />
-        <EmailOutlinedIcon />
-        <NotificationsOutlinedIcon />
         <div className='navbar__right__user'>
           <Link to={`/profile/${name}`} className='navbar__right__user__link'>
             <img 
@@ -64,6 +78,17 @@ const Navbar = () => {
             <span className='navbar__right__user__username'>{name}</span>
           </Link>
         </div>
+
+        <Dropdown menu={{ items }}>
+          <a onClick={(e) => e.preventDefault()}>
+            <Space>
+              <SettingOutlined style={{fontSize: 25}}/>
+              <DownOutlined style={{fontSize: 10}}/>
+            </Space>
+          </a>
+        </Dropdown>
+
+        
       </div>
     </div>
   )

@@ -24,6 +24,11 @@ const Navbar = () => {
   useEffect(() => {
     localStorage.setItem("darkMode", darkMode);
   }, [darkMode]);
+
+  const logout = () => {
+    localStorage.removeItem('currentUser')
+    window.location.reload()
+  }
   
   const items: MenuProps['items'] = [
     {
@@ -36,9 +41,13 @@ const Navbar = () => {
     },
 
     {
-      key: '1',
+      key: '2',
       danger: true,
-      label: 'Logout',
+      label: (
+        <div onClick={logout}>
+          Logout
+        </div>
+      ),
     },
   ];
 

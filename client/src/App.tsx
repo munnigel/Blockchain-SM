@@ -29,17 +29,10 @@ function App() {
   const [darkMode, setDarkMode] = useState(getDefaultTheme());
 
   const getCurrentUser = () => {
-    const user = localStorage.getItem('currentUser');
-    return user ? user : null;
-  };
+    const user = localStorage.getItem('currentUser')
+    return user ? user : null
+  }
 
-
-  const [currentUser, setCurrentUser] = useState(getCurrentUser());
-
-  useEffect(() => {
-    // When App loads, we check if currentUser exists in local storage
-    setCurrentUser(getCurrentUser());
-  }, []);
 
   const Layout: React.FC = () => {
     return (
@@ -59,7 +52,14 @@ function App() {
   }
 
   const ProtectedRoute = ({ children }: { children: any }) => {
-    if (!currentUser) {
+    const [user, setUser] = useState(getCurrentUser());
+  
+    useEffect(() => {
+      // This will run when the pathname changes (from registering or logging in)
+      setUser(getCurrentUser());
+    }, [window.location.pathname]); // Dependency on the pathname
+  
+    if (!user) {
       return <Navigate to="/login" />;
     }
 

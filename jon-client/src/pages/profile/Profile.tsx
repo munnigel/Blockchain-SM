@@ -6,10 +6,11 @@ import { useSelector } from 'react-redux';
 import Post from '../../components/post/Post';
 import { useParams } from 'react-router-dom';
 import CachedProfilesAndPostsContext from '../../contexts/CachedProfilesAndPostsContext/CachedProfilesAndPostsContext'
-// import EthersContext from '../../contexts/EthersContext/EthersContext'
+import EthersContext from '../../contexts/EthersContext/EthersContext'
 import { SocialNetworkProfile } from '../../types/SocialNetworkProfile'
 import { fetchPostsOfProfile } from '../../utils/social-network-profile-data';
 import { SocialNetworkPost } from '../../types/SocialNetworkPost';
+import { SocialNetwork } from '../../utils/social-network';
 
 const ProfilePage: React.FC = () => {
   const { address } = useParams();
@@ -32,9 +33,74 @@ const ProfilePage: React.FC = () => {
   const isMounted = useRef(false);
   const [profile, setProfile] = useState<null | SocialNetworkProfile>(null);
   const [postsData, setPostsData] = useState<(SocialNetworkPost | null)[]>([])
-  const { getProfile, getProfileFromCache, refetchAll, getPost } = useContext(
+
+  const { provider, universalProfile } = useContext(EthersContext);
+  const [isSubscribed, setIsSubscribed] = useState<null | boolean>(null);
+
+  const validate =
+    provider &&
+    universalProfile?.socialNetworkProfileDataContract &&
+    universalProfile?.socialNetworkProfileDataERC725Contract &&
+    profile?.socialProfileStats &&
+    profile.address !== universalProfile.address;
+
+  const { getProfile, getPost } = useContext(
     CachedProfilesAndPostsContext
   );
+
+  useEffect(() => {
+    const fetchSubscriptionStatus = async () => {
+      if (!validate) return;
+      try {
+        setIsSubscribed(
+          await universalProfile?.socialNetworkProfileDataContract?.isSubscriberOf(
+            profile.address
+          )
+        );
+      } catch (e) {
+        console.error(e);
+      }
+    };
+    fetchSubscriptionStatus();
+  }, [universalProfile]);
+
+  const subscribe = async () => {
+    if (!validate) return;
+    if (
+      await universalProfile?.socialNetworkProfileDataContract?.isSubscriberOf(
+        profile.address
+      )
+    ) {
+      setIsSubscribed(true);
+      return;
+    }
+
+    const tx = await SocialNetwork.connect(provider.getSigner()).subscribeUser(
+      profile.address
+    );
+    await tx.wait();
+    setIsSubscribed(true);
+    // await refetch();
+  };
+
+  const unsubscribe = async () => {
+    if (!validate) return;
+    if (
+      !(await universalProfile?.socialNetworkProfileDataContract?.isSubscriberOf(
+        profile.address
+      ))
+    ) {
+      setIsSubscribed(false);
+      return;
+    }
+
+    const tx = await SocialNetwork.connect(
+      provider.getSigner()
+    ).unsubscribeUser(profile.address);
+    await tx.wait();
+    setIsSubscribed(false);
+    // await refetch();
+  };
 
   // profile may timeout periodically
   const initProfile = async (address: string) => {
@@ -77,6 +143,7 @@ const ProfilePage: React.FC = () => {
           <div className="profile-details">
             <h1 className="profile-name">{profile?.name}</h1>
             <div className="profile-stats">
+              {/* TODO: Subscribe button */}
               <span>{profile?.socialProfileStats?.subscribers} Followers</span> - <span>{profile?.socialProfileStats?.subscriptions} Following</span>
             </div>
             {/* {!isCurrentUser && (

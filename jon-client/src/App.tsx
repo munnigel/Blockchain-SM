@@ -28,7 +28,7 @@ function App() {
   const [darkMode, setDarkMode] = useState(getDefaultTheme());
 
   const getCurrentUser = () => {
-    const user = localStorage.getItem('currentUser')
+    const user = localStorage.getItem('isUniversalProfileExtension')
     return user ? user : null
   }
 

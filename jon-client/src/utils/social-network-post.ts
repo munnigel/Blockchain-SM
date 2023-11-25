@@ -23,7 +23,7 @@ import { ERC725Modified } from "./ERC725Modified";
 import { SocialNetwork } from "./social-network";
 
 // Helper
-import { getSocialNetworkProfileDataAddress } from "./universal-profile";
+import { fetchProfile, getSocialNetworkProfileDataAddress } from "./universal-profile";
 import { uploadJSONToIPFSAndGetLSP2JSONURL } from "./ipfs-client";
 import { fetchPage } from "./page";
 import _ from "lodash";
@@ -91,16 +91,28 @@ export const fetchPost = async (
       createSocialNetworkPostERC725Contract(address)
     );
 
+    // use author UP address to get profile data
     const author = await socialNetworkPostContract.author();
+    const snp = await fetchProfile(author)
+    const profileImage = snp?.profileImage
+    const profileName = snp?.name
+
     const referencedPost = await socialNetworkPostContract.referencedPost();
     const type: PostType = await socialNetworkPostContract.postType();
 
     let content = "";
+    let image = "";
     try {
       const postContentData: any =
         await socialNetworkPostERC725Contract.fetchData("SNPostContent");
       content = postContentData?.value?.content ?? "";
+      image = postContentData?.value?.image ?? "";
     } catch (e) {}
+
+    if (image) {
+      const imageHash = image;
+      image = `${IPFS_GATEWAY}/${imageHash}`;
+    }
 
     const taggedUsers: string[] =
       ((await socialNetworkPostERC725Contract.fetchData("SNUserTags[]"))
@@ -112,8 +124,11 @@ export const fetchPost = async (
       author,
       address,
       referencedPost,
+      profileImage,
+      profileName,
       type,
       content,
+      image,
       taggedUsers,
       ...socialNetworkPostStats,
     } as SocialNetworkPost;

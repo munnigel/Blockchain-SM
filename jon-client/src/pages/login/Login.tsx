@@ -1,8 +1,21 @@
+import { useContext, useEffect } from "react";
 import { Link } from "react-router-dom";
 import ConnectUniversalProfileButton from "../../components/ConnectUniversalProfileButton";
+import EthersContext from "../../contexts/EthersContext/EthersContext";
+import {useNavigate} from "react-router-dom";
 import "./login.scss";
 
 const Login = () => {
+  // routing logic here
+  const navigate = useNavigate();
+  const {universalProfile} = useContext(EthersContext);
+
+  useEffect(() => {
+    if (universalProfile) {
+      // then we route
+      navigate("/");
+    }
+  }, [universalProfile]);
 
   return (
     <div className="login">

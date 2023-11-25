@@ -30,7 +30,7 @@ interface Props {
   postContent?: string | undefined;
 }
 
-const CreatePostButton: FC<Props> = ({ sx, postFile, postContent}) => {
+const CreatePostButton: FC<Props> = ({ sx, postFile, postContent }) => {
   const { provider, universalProfile } = useContext(EthersContext);
   const { getProfile } = useContext(CachedProfilesAndPostsContext);
   const [showDialog, setShowDialog] = useState<boolean>(false);
@@ -45,7 +45,7 @@ const CreatePostButton: FC<Props> = ({ sx, postFile, postContent}) => {
 
   const post = async () => {
     setLoading(true);
-    if (!postContent) return
+    if (!postContent) return;
     // upload image to IPFS and get back imageurl link
     let image;
     if (postFile) {
@@ -54,14 +54,12 @@ const CreatePostButton: FC<Props> = ({ sx, postFile, postContent}) => {
         image = uploadResult;
       }
     }
-    console.log(image)
     const promise = createStandalonePost(provider, postContent, image);
     toast.promise(promise, {
       pending: `Creating post...`,
       success: `Successfully created post...`,
       error: `Creating post failed. (Probably no LYXe available.)`,
     });
-
 
     try {
       await promise;

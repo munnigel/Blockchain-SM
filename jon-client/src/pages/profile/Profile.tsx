@@ -6,7 +6,7 @@ import { useSelector } from 'react-redux';
 import Post from '../../components/post/Post';
 import { useParams } from 'react-router-dom';
 import CachedProfilesAndPostsContext from '../../contexts/CachedProfilesAndPostsContext/CachedProfilesAndPostsContext'
-import EthersContext from '../../contexts/EthersContext/EthersContext'
+// import EthersContext from '../../contexts/EthersContext/EthersContext'
 import { SocialNetworkProfile } from '../../types/SocialNetworkProfile'
 import { fetchPostsOfProfile } from '../../utils/social-network-profile-data';
 import { SocialNetworkPost } from '../../types/SocialNetworkPost';
@@ -46,7 +46,11 @@ const ProfilePage: React.FC = () => {
   };
 
   const getAllUsersPosts = async (address: string) => {
+    // TODO: add ability to fetch next 10
+    // Get first 10 post contract addresses from the profile contract, this is stored as a list
     const postsAddresses = await fetchPostsOfProfile(address, 0, 10)
+
+    // Get post data and set to a list
     for (let key in postsAddresses?.items) {
       let postData = await getPost(postsAddresses.items[key])
       console.log(postData)
@@ -62,16 +66,6 @@ const ProfilePage: React.FC = () => {
     initProfile(address);
     getAllUsersPosts(address)
   }, [address]);
-
-  useEffect(() => {
-    console.log(postsData);
-  }, [postsData]);
-
-
-
-  // if (!profile) {
-  //   return <p>Profile not found.</p>;
-  // }
 
   return (
     <div className="profile-page-container">
@@ -94,6 +88,7 @@ const ProfilePage: React.FC = () => {
       <div className="profile-content">
         {postsData.map((post) => (
           <Post key={post?.address} post={{
+            address: post?.address,
             profilePic: profile?.profileImage[0].url,
             userId: post?.author,
             description: post?.content,

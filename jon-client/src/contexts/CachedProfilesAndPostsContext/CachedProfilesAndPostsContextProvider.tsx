@@ -46,7 +46,6 @@ const CachedProfilesAndPostsContextProvider = ({
     ignoreCache?: boolean
   ): Promise<null | SocialNetworkPost> => {
     if (posts[address] && !ignoreCache) return posts[address];
-    console.log("fetching post NOOOOOOOOOOWWWWWWWW")
     const post = await fetchPost(address);
     if (post) {
       setPosts((posts) => ({

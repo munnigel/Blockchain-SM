@@ -70,6 +70,8 @@ const CachedProfilesAndPostsContextProvider = ({
     resetPosts();
   };
 
+  const getAllProfilesFromCache = () => profiles ?? null
+
   const refetchProfiles = async () => {
     const newProfiles: AddressToSocialNetworkProfileMapping = {};
     const profileAddresses = Object.keys(profiles);
@@ -105,6 +107,7 @@ const CachedProfilesAndPostsContextProvider = ({
         getProfile,
         getPost,
         getProfileFromCache,
+        getAllProfilesFromCache,
         getPostFromCache,
         resetAll,
         resetPosts,

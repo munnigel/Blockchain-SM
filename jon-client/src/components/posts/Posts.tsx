@@ -23,7 +23,6 @@ const Posts: React.FC = () => {
     // get all posts in the blockbuzz dapp
   };
 
-
   const fetchPostAddresses = async (): Promise<null | Page<string>> => {
     const page: Page<string> = {
       totalItemCount: 0,
@@ -52,18 +51,20 @@ const Posts: React.FC = () => {
 
   // run get postsData from addresses
   const getPosts = async () => {
-    const page = await fetchPostAddresses()
+    const page = await fetchPostAddresses();
     if (page?.items) {
-        const addresses = Object.values(page.items);
-        const postsData = await Promise.all(addresses.map(address => getPost(address)));
-        setPosts(postsData)
-      }
-  }
+      const addresses = Object.values(page.items);
+      const postsData = await Promise.all(
+        addresses.map((address) => getPost(address))
+      );
+      setPosts(postsData);
+    }
+  };
 
   useEffect(() => {
-    // getPosts()
-    // console.log(posts) // TODO: fix these throwing errors when getting posts to show up on users main feed
-  }, []);
+    getPosts();
+    // console.log(posts); // TODO: fix these throwing errors when getting posts to show up on users main feed
+  }, [posts]);
 
   // // Sort posts in descending order based on timestamp
   // const sortedPosts = [...posts].sort((a, b) => {
@@ -73,8 +74,36 @@ const Posts: React.FC = () => {
   return (
     <div className="posts">
       {posts.map((post) => (
-        <Post post={post} key={post?.address} />
+        <Post
+          key={post?.address}
+          post={{
+            address: post?.address,
+            profilePic: post?.profileImage?.[0]?.url ?? "https://upload.wikimedia.org/wikipedia/commons/8/89/Portrait_Placeholder.png",
+            userId: post?.author,
+            content: post?.content,
+            profileName: post?.profileName,
+            likes: post?.likes,
+            comments: post?.comments,
+            timestamp: post?.timestamp,
+            image: post?.image,
+          }}
+        />
       ))}
+
+      {/* {posts && posts.map((post) => (
+          <Post key={post?.address} post={{
+              address: post?.address,
+              profilePic: post?.profileImage[0].url,
+              userId: post?.author,
+              content: post?.content,
+              profileName: post?.profileName,
+              likes: post?.likes,
+              comments: post?.comments,
+              timestamp: post?.timestamp,
+              image: post?.image
+            }}
+          />
+      ))} */}
     </div>
   );
 };

@@ -16,7 +16,7 @@ export interface SocialNetworkPostStats {
 export type SocialNetworkPost = SocialNetworkPostStats & {
   address: string;
   author: string;
-  profileImage: Image[];
+  profileImage?: Image[];
   profileName: string;
   content: string;
   taggedUsers: string[];

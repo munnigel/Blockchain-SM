@@ -41,13 +41,13 @@
           .friend-button {
             padding: 10px 20px; // Larger padding
             margin-right: 10px; // Space between buttons
-            background-color: themed('logo');
-            color: themed('textColor');
+            background-color: themed('bg');
+            color: themed('textColorSoft');
             border: none;
             border-radius: 5px;
             cursor: pointer;
             &:hover {
-              background-color: darken(themed('logo'), 15%);
+              background-color: darken(themed('bgSoft'), 15%);
             }
           }
           .message-button {

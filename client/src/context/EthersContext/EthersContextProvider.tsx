@@ -196,7 +196,7 @@ const EthersContextProvider: FC<Props> = ({ children }) => {
             component="a"
             href="https://docs.lukso.tech/guides/browser-extension/install-browser-extension/"
             target="_blank"
-            sx={{ color: "white" }}
+            sx={{ color: "black" }}
           >
             Download here
           </Box>

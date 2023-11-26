@@ -49,7 +49,7 @@ const Post: React.FC<Props> = ({ post }) => {
 
   useEffect(() => {
     fetchLikeStatus();
-  }, [universalProfile]);
+  }, [universalProfile, currentPost]);
 
   const { getPost } = useContext(CachedProfilesAndPostsContext);
 
@@ -74,7 +74,7 @@ const Post: React.FC<Props> = ({ post }) => {
     );
     await tx.wait();
     setHasLiked(true);
-    // await onChange();
+    await refetchPost();
   };
 
   const handleDislike = async () => {
@@ -93,7 +93,7 @@ const Post: React.FC<Props> = ({ post }) => {
     );
     await tx.wait();
     setHasLiked(false);
-    // await onChange();
+    await refetchPost();
   };
 
   const refetchPost = async () =>
@@ -108,30 +108,30 @@ const Post: React.FC<Props> = ({ post }) => {
           <div className="post__container__user__userInfo">
             <img
               className="post__container__user__userInfo__profilePic"
-              src={post.profilePic}
+              src={currentPost.profilePic}
               alt=""
             />
             <div className="post__container__user__userInfo__details">
               <Link
-                to={`/profile/${post.userId}`}
+                to={`/profile/${currentPost.userId}`}
                 style={{ textDecoration: "none", color: "inherit" }}
               >
                 <span className="post__container__user__userInfo__details__name">
-                  {post.name}
+                  {currentPost.profileName}
                 </span>
               </Link>
-              <span className="post__container__user__userInfo__details__date">
-                {formatTimestamp(post.timestamp)}
-              </span>
+              {currentPost.timestamp && <span className="post__container__user__userInfo__details__date">
+                {formatTimestamp(currentPost.timestamp)}
+              </span>}
             </div>
           </div>
           <MoreHorizIcon />
         </div>
         <div className="post__container__content">
-          <p className="post__container__content__p">{post.description}</p>
+          <p className="post__container__content__p">{currentPost.content}</p>
           <img
             className="post__container__content__image"
-            src={post.image}
+            src={currentPost.image}
             alt=""
           />
         </div>
@@ -143,17 +143,17 @@ const Post: React.FC<Props> = ({ post }) => {
               <ThumbUpAltOutlinedIcon onClick={handleLike} />
             )}
             {/* <LikePostButton post={post} onChange={refetchPost}/> */}
-            {post.likes} Likes
+            {currentPost.likes} Likes
           </div>
           <div
             className="post__container__info__item"
             onClick={() => setCommentOpen(!commentOpen)}
           >
             <TextsmsOutlinedIcon />
-            {post.comments} Comments
+            {currentPost.comments} Comments
           </div>
         </div>
-        {commentOpen && <Comments post={post}/>}
+        {commentOpen && <Comments post={post} />}
       </div>
     </div>
   );

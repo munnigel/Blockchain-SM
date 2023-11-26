@@ -85,7 +85,7 @@ const Comments: React.FC<Props> = ({ post }) => {
   return (
     <div className="comments">
       <div className="comments__write">
-        <img className="comments__write__profilePic" src="" alt="" />
+        <img className="comments__write__profilePic" src={universalProfile?.profileImage?.[0].url ?? "https://upload.wikimedia.org/wikipedia/commons/8/89/Portrait_Placeholder.png"} />
         <input
           className="comments__write__input"
           type="text"
@@ -100,7 +100,7 @@ const Comments: React.FC<Props> = ({ post }) => {
         <div className="comments__comment">
           <img
             className="comments__comment__profilePic"
-            src={comment?.profileImage[0].url}
+            src={comment?.profileImage?.[0].url}
             alt=""
           />
           <div className="comments__comment__info">
@@ -109,7 +109,7 @@ const Comments: React.FC<Props> = ({ post }) => {
             </span>
             <p className="comments__comment__info__p">{comment?.content}</p>
           </div>
-          <span className="comments__comment__date">1 hour ago</span>
+          {/* <span className="comments__comment__date">1 hour ago</span> */}
         </div>
       ))}
     </div>

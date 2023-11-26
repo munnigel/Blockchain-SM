@@ -4,6 +4,7 @@ import React, { createContext } from "react";
 // Types
 import type { SocialNetworkProfile } from "../../types/SocialNetworkProfile";
 import type { SocialNetworkPost } from "./../../types/SocialNetworkPost.d";
+import { AddressToSocialNetworkProfileMapping } from "../../types/AddressToSocialNetworkProfileMapping";
 
 export interface CachedProfilesAndPostsContextValue {
   getProfile: (
@@ -15,6 +16,7 @@ export interface CachedProfilesAndPostsContextValue {
     ignoreCache?: boolean
   ) => Promise<null | SocialNetworkPost>;
   getProfileFromCache: (address: string) => null | SocialNetworkProfile;
+  getAllProfilesFromCache: () => null | AddressToSocialNetworkProfileMapping;
   getPostFromCache: (address: string) => null | SocialNetworkPost;
   resetAll: () => void;
   resetPosts: () => void;
@@ -27,6 +29,7 @@ export interface CachedProfilesAndPostsContextValue {
 const CachedProfilesAndPostsContext =
   createContext<CachedProfilesAndPostsContextValue>({
     getProfile: async () => null,
+    getAllProfilesFromCache: () => null,
     getPost: async () => null,
     getProfileFromCache: () => null,
     getPostFromCache: () => null,

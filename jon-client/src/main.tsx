@@ -11,14 +11,14 @@ ReactDOM.createRoot(document.getElementById('root')!).render(
     <CachedProfilesAndPostsContextProvider>
       <EthersContextProvider>
         <App />
-      </EthersContextProvider>
-      <ToastContainer
+        <ToastContainer
             style={{ cursor: "default" }}
             autoClose={15000}
             theme="colored"
             closeOnClick={false}
             pauseOnFocusLoss={false}
           />
+      </EthersContextProvider>
     </CachedProfilesAndPostsContextProvider>
   </React.StrictMode>,
 )

@@ -37,3 +37,5 @@ What we have added in this project was to build upon the foundations of the abov
     - Possible solutions may be modify the structure of the smart contract such that retrieval of data is simplified
     - Another possible solution may be to implement a caching in another manner such that it is more efficient
 2. Integrate transaction relaying with [thirdweb](https://thirdweb.com/) and payment channels to improve user experience
+3. Right navbar & subscription updates for user experience
+4. Left navbar & more functionalities such as messaging, etc.
